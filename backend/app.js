@@ -1,6 +1,7 @@
 const express = require("express");
 const app = express();
 const cookieParser = require("cookie-parser")
+const cors = require('cors')
 
 //configuring the env file only in development mode
 if (process.env.NODE_ENV !== 'PRODUCTION')
@@ -9,6 +10,7 @@ if (process.env.NODE_ENV !== 'PRODUCTION')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
+app.use(cors())
 
 const user = require('./routes/user');
 const category = require('./routes/category');
