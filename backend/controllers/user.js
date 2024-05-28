@@ -28,7 +28,8 @@ exports.registerUser = async (req, res) => {
             .cookie("token", token, {
                 expirees: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
                 httpOnly: true,
-                secure: true
+                secure: true,
+                sameSite: 'None' // Allow cross-site requests
             })
             .json({
                 success: true,
@@ -71,7 +72,8 @@ exports.loginUser = async (req, res) => {
             cookie("token", token, {
                 expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
                 httpOnly: true,
-                secure: true
+                secure: true,
+                sameSite: 'None' // Allow cross-site requests
             })
             .json({
                 success: true,
@@ -94,7 +96,8 @@ exports.logoutUser = async (req, res) => {
             .cookie("token", null, {
                 expires: new Date(Date.now()),
                 httpOnly: true,
-                secure: true
+                secure: true,
+                sameSite: 'None' // Allow cross-site requests
             })
             .json({
                 success: true,
@@ -196,7 +199,8 @@ exports.deleteMyProfile = async (req, res) => {
         res.cookie("token", null, {
             expires: new Date(Date.now()),
             httpOnly: true,
-            secure: true
+            secure: true,
+            sameSite: 'None' // Allow cross-site requests
         })
 
         res.status(200).json({
