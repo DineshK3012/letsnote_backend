@@ -10,7 +10,15 @@ if (process.env.NODE_ENV !== 'PRODUCTION')
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
-app.use(cors())
+
+// Configure CORS with credentials
+const corsOptions = {
+    origin: process.env.FRONTEND_URL, // Replace with your frontend URL
+    credentials: true, // Allow requests with credentials (cookies)
+    optionSuccessStatus: 200 // Some legacy browsers may require this
+}
+
+app.use(cors(corsOptions));
 
 const user = require('./routes/user');
 const category = require('./routes/category');
@@ -19,6 +27,5 @@ const notes = require('./routes/note');
 app.use('/api', user);
 app.use('/api', notes);
 app.use('/api', category);
-
 
 module.exports = app;

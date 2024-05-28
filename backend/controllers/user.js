@@ -27,13 +27,15 @@ exports.registerUser = async (req, res) => {
         res.status(201)
             .cookie("token", token, {
                 expirees: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-                httpOnly: true
+                httpOnly: true,
+                secure: true
             })
             .json({
                 success: true,
                 user,
                 message: "Registration Successful"
             })
+
     } catch (error) {
         res.status(500).json({
             success: false,
@@ -68,7 +70,8 @@ exports.loginUser = async (req, res) => {
         res.status(200).
             cookie("token", token, {
                 expires: new Date(Date.now() + 10 * 24 * 60 * 60 * 1000),
-                httpOnly: true
+                httpOnly: true,
+                secure: true
             })
             .json({
                 success: true,
@@ -90,7 +93,8 @@ exports.logoutUser = async (req, res) => {
         res.status(200)
             .cookie("token", null, {
                 expires: new Date(Date.now()),
-                httpOnly: true
+                httpOnly: true,
+                secure: true
             })
             .json({
                 success: true,
@@ -191,7 +195,8 @@ exports.deleteMyProfile = async (req, res) => {
         //logout the user
         res.cookie("token", null, {
             expires: new Date(Date.now()),
-            httpOnly: true
+            httpOnly: true,
+            secure: true
         })
 
         res.status(200).json({
